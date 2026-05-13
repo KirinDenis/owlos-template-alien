@@ -1,0 +1,428 @@
+<!--
+  ALIEN / ALIENS — fan tribute · v1.0.0
+  Copyright (c) 2026 owlos s.r.o.
+  Licensed under MIT — https://opensource.org/licenses/MIT
+  https://owlos.sk
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NOSTROMO // STATION TRACKER — Alien & Aliens fan tribute</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A fan tribute to Ridley Scott's Alien (1979) and James Cameron's Aliens (1986) — a live motion-tracker map of an off-world colony.">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Demo disclaimer — remove this block when deploying as a real website -->
+<div id="owlos-demo-banner">
+  <span>⚠ <strong>FAN TRIBUTE / TEMPLATE DEMO</strong> — not an official Alien franchise site. All trademarks belong to 20th Century / Disney.</span>
+  <button id="owlos-demo-ok">ACKNOWLEDGED</button>
+</div>
+
+<canvas id="tracker-canvas"></canvas>
+<div class="crt-overlay"></div>
+
+<!-- HUD top bar -->
+<header class="hud-top">
+  <span class="hud-pulse"></span>
+  <span>WEYLAND-YUTANI CORP</span>
+  <span class="hud-sep">//</span>
+  <span>STATION HADLEY'S HOPE — LV-426</span>
+  <span class="hud-sep">//</span>
+  <span id="hud-clock">000:00:00</span>
+  <span class="hud-sep">//</span>
+  <span>KILLS <em id="hud-kills" style="color:#ff7878;font-style:normal">0</em></span>
+  <span class="hud-sep">//</span>
+  <span>SHOTS <em id="hud-shots" style="color:#f4c419;font-style:normal">0</em></span>
+  <span class="hud-spacer"></span>
+  <a href="#cast" class="hud-link">CREW</a>
+  <a href="#xeno" class="hud-link red">XENO</a>
+  <a href="#facts" class="hud-link">DOSSIER</a>
+  <button id="audio-toggle" class="hud-link"><span class="lbl">AUDIO OFFLINE</span></button>
+</header>
+
+<main class="shell">
+
+  <!-- ── HERO ─────────────────────────────────────── -->
+  <section class="bracket hero">
+    <span class="hero-eye">⌖ MOTION TRACKER ACTIVE — VOID FREQUENCY 22.6 GHz</span>
+    <h1 class="hero-title">
+      <span class="a1">ALIEN</span><span class="sep"> // </span><span class="a2">ALIENS</span>
+    </h1>
+    <p class="hero-sub">
+      A fan tribute to <strong>Ridley Scott's</strong> <em>Alien</em> (1979)
+      and <strong>James Cameron's</strong> <em>Aliens</em> (1986).
+      The map below is a live motion-tracker feed from the colony at Hadley's Hope.
+      Green blips: <strong>Colonial Marines</strong>. Red blips: <em>contacts</em>.
+    </p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-k">Crew</div><div class="stat-v" id="stat-marines">10</div></div>
+      <div class="stat"><div class="stat-k">Contacts</div><div class="stat-v" id="stat-xenos">5</div></div>
+      <div class="stat"><div class="stat-k">Distance</div><div class="stat-v">39 m</div></div>
+      <div class="stat"><div class="stat-k">Sync</div><div class="stat-v">88%</div></div>
+    </div>
+  </section>
+
+  <!-- ── ORIGIN ───────────────────────────────────── -->
+  <section class="bracket section" id="origin">
+    <h2 class="glitch" data-text="// ORIGIN STORY">// ORIGIN STORY</h2>
+    <p class="section-sub">Two films · seven years apart · one creature that changed cinema</p>
+    <div class="body">
+      <p>In 1979, <strong>Ridley Scott</strong> turned a low-budget script titled <em>"Star Beast"</em> into a film that redefined science-fiction horror.
+      The crew of the commercial towing vessel <strong>Nostromo</strong> picks up a distress signal, finds a derelict ship and an alien egg chamber,
+      and brings something on board that none of them survive — except <strong>Ellen Ripley</strong>.</p>
+      <p>Seven years later, <strong>James Cameron</strong> took the same creature and built a war film around it.
+      <em>Aliens</em> (1986) sent a squad of Colonial Marines to the colony at Hadley's Hope — a 158-person outpost on <em>LV-426</em>,
+      the same moon where the Nostromo first encountered the egg. The marines find one survivor: a little girl named <strong>Newt</strong>.</p>
+      <p>Where the first film whispered, the second screamed. Both worked.
+      <em>Alien</em> remains a meditation on the alien-as-violation. <em>Aliens</em> is a meditation on the alien-as-army.
+      Together they are the only two films most fans consider truly canon.</p>
+    </div>
+  </section>
+
+  <!-- ── CAST ─────────────────────────────────────── -->
+  <section class="bracket section" id="cast">
+    <h2 class="glitch" data-text="// PERSONNEL FILES">// PERSONNEL FILES</h2>
+    <p class="section-sub">Click any card to open Wikipedia · photos auto-loaded from Wikimedia</p>
+
+    <div class="cast">
+      <a class="cast-card" href="https://en.wikipedia.org/wiki/Sigourney_Weaver" target="_blank" rel="noopener" data-wiki-photo="Sigourney_Weaver">
+        <div class="cast-img">
+          <span class="cast-id">01 // LEAD</span>
+          <img alt="Sigourney Weaver" data-fallback="https://en.wikipedia.org/wiki/Special:FilePath/Sigourney_Weaver_by_Gage_Skidmore.jpg?width=400">
+        </div>
+        <div class="cast-name">SIGOURNEY WEAVER</div>
+        <div class="cast-role">Ellen Ripley · I & II</div>
+        <div class="cast-bio">Reluctant horror lead, then unreluctant Oscar-nominated action lead. Reprised Ripley four times across two decades.</div>
+        <div class="cast-wiki">↗ WIKIPEDIA</div>
+      </a>
+
+      <a class="cast-card" href="https://en.wikipedia.org/wiki/Ridley_Scott" target="_blank" rel="noopener" data-wiki-photo="Ridley_Scott">
+        <div class="cast-img">
+          <span class="cast-id">02 // DIR-1979</span>
+          <img alt="Ridley Scott" data-fallback="https://en.wikipedia.org/wiki/Special:FilePath/Ridley_Scott_by_Gage_Skidmore.jpg?width=400">
+        </div>
+        <div class="cast-name">RIDLEY SCOTT</div>
+        <div class="cast-role">Director · Alien (1979)</div>
+        <div class="cast-bio">A commercial director when hired. Used trucker-cap blue-collar realism to make the spaceship feel lived-in. Returned with Prometheus and Covenant.</div>
+        <div class="cast-wiki">↗ WIKIPEDIA</div>
+      </a>
+
+      <a class="cast-card" href="https://en.wikipedia.org/wiki/James_Cameron" target="_blank" rel="noopener" data-wiki-photo="James_Cameron">
+        <div class="cast-img">
+          <span class="cast-id">03 // DIR-1986</span>
+          <img alt="James Cameron" data-fallback="https://en.wikipedia.org/wiki/Special:FilePath/James_Cameron_by_Gage_Skidmore.jpg?width=400">
+        </div>
+        <div class="cast-name">JAMES CAMERON</div>
+        <div class="cast-role">Director · Aliens (1986)</div>
+        <div class="cast-bio">Pitched the sequel by writing "ALIEN" on a chalkboard, adding an "S", then drawing a dollar sign. Got the job. Invented the Pulse Rifle.</div>
+        <div class="cast-wiki">↗ WIKIPEDIA</div>
+      </a>
+
+      <a class="cast-card" href="https://en.wikipedia.org/wiki/H._R._Giger" target="_blank" rel="noopener" data-wiki-photo="H._R._Giger">
+        <div class="cast-img">
+          <span class="cast-id">04 // DESIGN</span>
+          <img alt="H.R. Giger" data-fallback="https://en.wikipedia.org/wiki/Special:FilePath/HR_Giger.jpg?width=400">
+        </div>
+        <div class="cast-name">H.R. GIGER</div>
+        <div class="cast-role">Creature design · Biomechanical</div>
+        <div class="cast-bio">Swiss surrealist whose airbrushed "Necronom IV" painting became the xenomorph. Won an Oscar for the design. Gave us the look of cosmic dread.</div>
+        <div class="cast-wiki">↗ WIKIPEDIA</div>
+      </a>
+
+      <a class="cast-card" href="https://en.wikipedia.org/wiki/Michael_Biehn" target="_blank" rel="noopener" data-wiki-photo="Michael_Biehn">
+        <div class="cast-img">
+          <span class="cast-id">05 // MARINE</span>
+          <img alt="Michael Biehn" data-fallback="https://en.wikipedia.org/wiki/Special:FilePath/Michael_Biehn_2010.jpg?width=400">
+        </div>
+        <div class="cast-name">MICHAEL BIEHN</div>
+        <div class="cast-role">Cpl. Hicks · Aliens</div>
+        <div class="cast-bio">Cameron's go-to lead. Replaced James Remar two weeks into shooting. Calm-voice counterweight to Hudson's panic.</div>
+        <div class="cast-wiki">↗ WIKIPEDIA</div>
+      </a>
+
+      <a class="cast-card" href="https://en.wikipedia.org/wiki/Bill_Paxton" target="_blank" rel="noopener" data-wiki-photo="Bill_Paxton">
+        <div class="cast-img">
+          <span class="cast-id">06 // MARINE</span>
+          <img alt="Bill Paxton" data-fallback="https://en.wikipedia.org/wiki/Special:FilePath/Bill_Paxton_2014.jpg?width=400">
+        </div>
+        <div class="cast-name">BILL PAXTON</div>
+        <div class="cast-role">Pvt. Hudson · Aliens</div>
+        <div class="cast-bio">"Game over, man, game over." Improvised most of his best lines. Only actor to be killed by a Terminator, an Alien and a Predator.</div>
+        <div class="cast-wiki">↗ WIKIPEDIA</div>
+      </a>
+
+      <a class="cast-card" href="https://en.wikipedia.org/wiki/Lance_Henriksen" target="_blank" rel="noopener" data-wiki-photo="Lance_Henriksen">
+        <div class="cast-img">
+          <span class="cast-id">07 // SYNTH</span>
+          <img alt="Lance Henriksen" data-fallback="https://en.wikipedia.org/wiki/Special:FilePath/Lance_Henriksen_2010.jpg?width=400">
+        </div>
+        <div class="cast-name">LANCE HENRIKSEN</div>
+        <div class="cast-role">Bishop · Synthetic, Aliens</div>
+        <div class="cast-bio">Made the synthetic empathetic. The knife trick was real — Cameron rigged a metal sheath so Henriksen could stab between Paxton's fingers at speed.</div>
+        <div class="cast-wiki">↗ WIKIPEDIA</div>
+      </a>
+
+      <a class="cast-card" href="https://en.wikipedia.org/wiki/Jerry_Goldsmith" target="_blank" rel="noopener" data-wiki-photo="Jerry_Goldsmith">
+        <div class="cast-img">
+          <span class="cast-id">08 // SCORE</span>
+          <img alt="Jerry Goldsmith" data-fallback="https://en.wikipedia.org/wiki/Special:FilePath/Jerry_Goldsmith_-_1976.jpg?width=400">
+        </div>
+        <div class="cast-name">JERRY GOLDSMITH</div>
+        <div class="cast-role">Score · Alien (1979)</div>
+        <div class="cast-bio">Composer of the eerie, fragmented Alien main theme. Cameron's friend James Horner took over for Aliens and turned terror into anthem.</div>
+        <div class="cast-wiki">↗ WIKIPEDIA</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── XENO LIFECYCLE ─────────────────────────── -->
+  <section class="bracket section" id="xeno">
+    <h2 class="glitch" data-text="// XENOMORPH XX121">// XENOMORPH XX121</h2>
+    <p class="section-sub">Bio-cycle as documented by Weyland-Yutani archivists · classified</p>
+    <div class="lifecycle">
+      <div class="lc-stage">
+        <svg class="lc-glyph" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+          <ellipse cx="16" cy="20" rx="9" ry="10"/>
+          <path d="M10 12 L14 10 L13 7 L16 4 L19 7 L18 10 L22 12"/>
+        </svg>
+        <div class="lc-num">STAGE 01</div>
+        <div class="lc-name">OVOMORPH</div>
+        <div class="lc-desc">Leathery, four-petaled egg. Reacts to body heat. Opens silently within 1.4 m of warm prey.</div>
+      </div>
+      <div class="lc-stage">
+        <svg class="lc-glyph" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M4 20 Q8 14 12 16 L16 12 L20 16 Q24 14 28 20"/>
+          <path d="M16 12 L16 26 L22 28 L16 26 L10 28"/>
+        </svg>
+        <div class="lc-num">STAGE 02</div>
+        <div class="lc-name">FACEHUGGER</div>
+        <div class="lc-desc">Spider-like, eight-fingered. Implants an embryo down the host's throat. Detaches and dies within 24 hours.</div>
+      </div>
+      <div class="lc-stage">
+        <svg class="lc-glyph" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M8 22 Q12 14 16 14 Q20 14 24 22"/>
+          <path d="M16 14 L16 6"/>
+          <path d="M8 22 Q12 28 16 28 Q20 28 24 22"/>
+          <circle cx="14" cy="20" r="1" fill="currentColor"/>
+          <circle cx="18" cy="20" r="1" fill="currentColor"/>
+        </svg>
+        <div class="lc-num">STAGE 03</div>
+        <div class="lc-name">CHESTBURSTER</div>
+        <div class="lc-desc">Bursts free 24–48 hours after implantation. Pale, eyeless, snake-like. Sheds skin and grows rapidly.</div>
+      </div>
+      <div class="lc-stage">
+        <svg class="lc-glyph" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M4 16 L10 16 L14 10 L16 6 L18 10 L22 16 L28 16"/>
+          <path d="M14 16 L14 26 L18 26 L18 16"/>
+          <path d="M10 16 L4 22 M22 16 L28 22"/>
+        </svg>
+        <div class="lc-num">STAGE 04</div>
+        <div class="lc-name">ADULT DRONE</div>
+        <div class="lc-desc">Two metres tall. Elongated skull, biomechanical chitin, acid for blood, inner pharyngeal jaw. Apex predator.</div>
+      </div>
+      <div class="lc-stage">
+        <svg class="lc-glyph" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M4 24 L10 14 L14 8 L16 4 L18 8 L22 14 L28 24"/>
+          <path d="M2 26 L6 24 L10 28 L14 24 L18 28 L22 24 L26 28 L30 26"/>
+          <circle cx="16" cy="10" r="1.5" fill="currentColor"/>
+        </svg>
+        <div class="lc-num">STAGE 05</div>
+        <div class="lc-name">QUEEN</div>
+        <div class="lc-desc">Five metres tall. Crowned head crest, dual jaws, egg-laying ovipositor. Hive intelligence and ambush tactics.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRODUCTION FACTS ─────────────────────────── -->
+  <section class="bracket section" id="facts">
+    <h2 class="glitch" data-text="// PRODUCTION DOSSIER">// PRODUCTION DOSSIER</h2>
+    <p class="section-sub">Hand-picked from cast/crew interviews, DVD commentaries, archived production notes</p>
+    <div class="facts-grid">
+      <div class="fact">
+        <div class="fact-tag">SCRIPT</div>
+        <h3>The chestburster scene was a real ambush</h3>
+        <p>Only Sigourney Weaver and a couple of crew knew when the chest would burst. The actors' shock — and Veronica Cartwright collapsing as fake blood hit her — is genuinely the first take.</p>
+      </div>
+      <div class="fact">
+        <div class="fact-tag">DESIGN</div>
+        <h3>The xenomorph head was a real human skull</h3>
+        <p>Giger painted a recovered cadaver skull into the smooth elongated head shape. The translucent dome covered actual cranial geometry, which is why it always looked anatomically wrong-but-correct.</p>
+      </div>
+      <div class="fact">
+        <div class="fact-tag">PROPS</div>
+        <h3>The motion tracker is a Casio calculator</h3>
+        <p>The 1986 prop was hand-built around a Casio fx-451 scientific calculator and a model boat detail kit. Hudson's tracker beep was a single sample played at increasing pitch by Cameron himself.</p>
+      </div>
+      <div class="fact">
+        <div class="fact-tag">FILMING</div>
+        <h3>The cat was not into it</h3>
+        <p>Jonesy the cat refused to react to a German shepherd that the crew brought in to scare him. They eventually swapped the dog for a stuffed prop wrapped in a German shepherd skin. The cat then reacted as required.</p>
+      </div>
+      <div class="fact">
+        <div class="fact-tag">CASTING</div>
+        <h3>Ripley was originally written as male</h3>
+        <p>The original script had no gendered pronouns for any role. Producer Alan Ladd Jr. made the call to cast a woman late. Sigourney Weaver — almost unknown — won the role over Veronica Cartwright, who became Lambert.</p>
+      </div>
+      <div class="fact">
+        <div class="fact-tag">SCORE</div>
+        <h3>James Horner wrote the score in four weeks</h3>
+        <p>Horner had four weeks to compose, orchestrate and record. He was so unhappy with the rushed result he didn't speak to Cameron for nine years. The score won him his first Oscar nomination anyway.</p>
+      </div>
+      <div class="fact">
+        <div class="fact-tag">CREW</div>
+        <h3>The Colonial Marines drilled like real Marines</h3>
+        <p>Cameron hired SAS veteran Al Matthews (who plays Sgt. Apone) to put the cast through two weeks of weapons drill and squad tactics. The dialogue overlap and chatter in the dropship is unscripted military banter.</p>
+      </div>
+      <div class="fact">
+        <div class="fact-tag">VFX</div>
+        <h3>Acid blood was actually acid</h3>
+        <p>For the close-up burns, the prop team used industrial floor cleaner that genuinely ate through the metal plates. The effect is real, not optical. The crew had to wear safety goggles.</p>
+      </div>
+      <div class="fact">
+        <div class="fact-tag">LEGACY</div>
+        <h3>The Queen redefined movie creature design</h3>
+        <p>Stan Winston's Queen puppet required 14 operators including 2 people lying inside the legs. She remains one of the largest fully practical creature effects ever filmed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SHOP ─────────────────────────────────────── -->
+  <section class="bracket section" id="shop">
+    <h2 class="glitch" data-text="// SUPPLY DEPOT">// SUPPLY DEPOT</h2>
+    <p class="section-sub">Curated searches · eBay · AliExpress · external suppliers</p>
+    <div class="shop-grid">
+      <a class="shop-card" href="https://www.ebay.com/sch/i.html?_nkw=alien+xenomorph+statue+neca" target="_blank" rel="noopener">
+        <span class="shop-plat">EBAY</span>
+        <span class="shop-h">NECA xenomorph figures</span>
+        <span class="shop-p">NECA's 1:18 articulated xenomorphs and Colonial Marines — the gold standard of franchise figures.</span>
+        <span class="shop-arrow">€18 – €120 →</span>
+      </a>
+      <a class="shop-card" href="https://www.ebay.com/sch/i.html?_nkw=aliens+motion+tracker+prop+replica" target="_blank" rel="noopener">
+        <span class="shop-plat">EBAY</span>
+        <span class="shop-h">Motion-tracker prop replicas</span>
+        <span class="shop-p">From 3D-printed kits to screen-accurate working replicas with sound &amp; LCD display.</span>
+        <span class="shop-arrow">€40 – €700 →</span>
+      </a>
+      <a class="shop-card" href="https://www.ebay.com/sch/i.html?_nkw=aliens+pulse+rifle+replica" target="_blank" rel="noopener">
+        <span class="shop-plat">EBAY</span>
+        <span class="shop-h">M41A Pulse Rifle</span>
+        <span class="shop-p">Cameron's rifle on a Thompson lower. Resin kits, foam display props, deactivated steel builds.</span>
+        <span class="shop-arrow">€60 – €1500 →</span>
+      </a>
+      <a class="shop-card" href="https://www.ebay.com/sch/i.html?_nkw=alien+original+poster+1979" target="_blank" rel="noopener">
+        <span class="shop-plat">EBAY</span>
+        <span class="shop-h">Original 1979 posters</span>
+        <span class="shop-p">"In space no one can hear you scream." Original release one-sheets, lobby cards, German B1s.</span>
+        <span class="shop-arrow">€90 – €3500 →</span>
+      </a>
+      <a class="shop-card" href="https://aliexpress.com/wholesale?SearchText=xenomorph+lamp" target="_blank" rel="noopener">
+        <span class="shop-plat">ALIEXPRESS</span>
+        <span class="shop-h">Egg / chestburster lamps</span>
+        <span class="shop-p">Glowing facehugger lamps, opening egg LEDs, USB-powered xenomorph desk lights. Cheap, kitsch, beloved.</span>
+        <span class="shop-arrow">€12 – €60 →</span>
+      </a>
+      <a class="shop-card" href="https://aliexpress.com/wholesale?SearchText=alien+t+shirt+nostromo" target="_blank" rel="noopener">
+        <span class="shop-plat">ALIEXPRESS</span>
+        <span class="shop-h">Nostromo crew shirts</span>
+        <span class="shop-p">Crew-of-the-Nostromo varsity jackets, USCSS patches, Weyland-Yutani logos. Bootleg paradise.</span>
+        <span class="shop-arrow">€8 – €40 →</span>
+      </a>
+      <a class="shop-card" href="https://www.ebay.com/sch/i.html?_nkw=alien+blu+ray+anthology+4k" target="_blank" rel="noopener">
+        <span class="shop-plat">EBAY</span>
+        <span class="shop-h">4K Alien Anthology</span>
+        <span class="shop-p">Both films restored in 4K, plus theatrical and director's cuts. Steelbook editions are the collector pick.</span>
+        <span class="shop-arrow">€35 – €120 →</span>
+      </a>
+      <a class="shop-card" href="https://aliexpress.com/wholesale?SearchText=alien+lego" target="_blank" rel="noopener">
+        <span class="shop-plat">ALIEXPRESS</span>
+        <span class="shop-h">LEGO-compatible kits</span>
+        <span class="shop-p">Unofficial brick kits — Nostromo deck, dropship, Hadley's Hope corridors. Builds for the patient.</span>
+        <span class="shop-arrow">€18 – €90 →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ───────────────────────────────────── -->
+  <footer class="bracket footer">
+    <span>© 2026 · Fan tribute · Alien™ and Aliens™ are trademarks of <em>20th Century Studios</em> / Disney.</span>
+    <span class="credit">Designed with <em>♥</em> by <a href="https://owlos.sk" target="_blank" rel="noopener">owlos.sk</a></span>
+  </footer>
+
+</main>
+
+<!-- HUD bottom bar -->
+<footer class="hud-bot">
+  <span>TRK-MOT-01</span>
+  <span class="hud-sep">//</span>
+  <span>SWEEP RATE 4.5 Hz</span>
+  <span class="hud-sep">//</span>
+  <span>RANGE 39 m</span>
+  <span class="hud-spacer"></span>
+  <span style="color: var(--red);">⚠ MULTIPLE CONTACTS DETECTED</span>
+</footer>
+
+<script>
+/* Demo banner dismissal — persists across reloads */
+(function () {
+  var KEY = 'owlos-demo-dismissed';
+  var banner = document.getElementById('owlos-demo-banner');
+  if (!banner) return;
+  if (localStorage.getItem(KEY)) { banner.remove(); return; }
+  document.getElementById('owlos-demo-ok').addEventListener('click', function () {
+    banner.remove();
+    localStorage.setItem(KEY, '1');
+  });
+}());
+
+/* Mission clock — counts up since page load */
+(function () {
+  var t0 = Date.now();
+  var el = document.getElementById('hud-clock');
+  function tick() {
+    var s = Math.floor((Date.now() - t0) / 1000);
+    var h = String(Math.floor(s / 3600)).padStart(3, '0');
+    var m = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
+    var ss = String(s % 60).padStart(2, '0');
+    el.textContent = h + ':' + m + ':' + ss;
+  }
+  tick(); setInterval(tick, 1000);
+}());
+
+/* Wikipedia photos via Special:FilePath (works on file://) */
+(function () {
+  document.querySelectorAll('[data-wiki-photo] img').forEach(function (img) {
+    var fallback = img.dataset.fallback;
+    if (!fallback) return;
+    img.onload = function () { img.classList.add('loaded'); };
+    img.onerror = function () {
+      // try via JSONP for a better thumb
+      var title = img.closest('[data-wiki-photo]').dataset.wikiPhoto;
+      if (!title) return;
+      var cb = '__wiki_' + Math.random().toString(36).slice(2);
+      window[cb] = function (d) {
+        try {
+          var pages = d.query.pages;
+          var thumb = pages[Object.keys(pages)[0]].thumbnail;
+          if (thumb && thumb.source) img.src = thumb.source;
+        } catch (e) {}
+        delete window[cb];
+        s.remove();
+      };
+      var s = document.createElement('script');
+      s.src = 'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&pithumbsize=400&titles=' + encodeURIComponent(title) + '&callback=' + cb;
+      document.head.appendChild(s);
+    };
+    img.src = fallback;
+  });
+}());
+</script>
+
+<script src="audio.js"></script>
+<script src="tracker.js"></script>
+
+</body>
+</html>
