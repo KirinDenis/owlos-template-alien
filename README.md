@@ -21,4 +21,4 @@ A fan-tribute site for the original *Alien* (1979) and *Aliens* (1986).
 Open `index.html` in a modern browser. Click anywhere to enable audio (browsers require user gesture).
 
 ## License
-MIT — Copyright © 2026 owlos s.r.o.
+MIT — Copyright © 2026 Denys Kirin
